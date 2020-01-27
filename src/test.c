@@ -6,11 +6,10 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 17:59:30 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/22 21:37:22 by thorker          ###   ########.fr       */
+/*   Updated: 2020/01/25 05:02:10 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 
@@ -30,10 +29,6 @@ int main(void)
 	}
 	glfwMakeContextCurrent(window);
 	
-	if (glewInit() != GLEW_OK) {
-		    fprintf(stderr, "Невозможно инициализировать GLEWn");
-			    return -1;
-	}
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 	float f = 0.2f;
