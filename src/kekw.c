@@ -6,29 +6,34 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:37:54 by thorker           #+#    #+#             */
-/*   Updated: 2020/01/27 06:26:51 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/05 17:18:23 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-
+#include <SDL_image.h>
 // Код шейдеров
 const GLchar* vertexShaderSource = "#version 400 core\n"
 	"layout (location = 0) in vec3 position;\n"
 	"layout (location = 1) in vec3 color;\n"
+	"layout (location = 2) in vec2 texCoord;\n"
 	"uniform float alpha;\n"
 	"out vec3 ourColor;\n"
+	"out vec2 TexCoord;\n"
 	"void main()\n"
 	"{\n"
+	"TexCoord = texCoord;\n"
 	"gl_Position = vec4(sin(alpha + position.x), cos(alpha + position.y), position.z, 1.0);\n"
 	"ourColor = vec3(color.x * sin(alpha), color.y * cos(alpha), color.z * sin(alpha));\n"
 	"}\0";
 const GLchar* fragmentShaderSource = "#version 400 core\n"
 	"in vec3 ourColor;\n"
+	"in vec2 TexCoord;\n"
 	"out vec4 color;\n"
+	"uniform sampler2D ourTexture;\n"
 	"void main()\n"
 	"{\n"
-	"color = vec4(ourColor, 1.0f);\n"
+	"color = texture(ourTexture, TexCoord);\n"
 	"}\n\0";
 
 int main()
@@ -41,6 +46,9 @@ int main()
     glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 0 );
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
     glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
+	SDL_Surface *img = IMG_Load("cat.png");
+	ft_putnbrln(img->h);
+	ft_putnbrln(img->w);
     // Устанавливает параметр для того, чтобы окно нельзя было изменять
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
@@ -130,10 +138,31 @@ int main()
     // Координаты треугольника
     GLfloat vertices[] =
     {
-        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 1.0f
     };
+	/*
+	GLfloat texCoords[] = {
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		0.5f, 1.0f
+	};
+	*/
+	//установка поведения текстуры за границами координатной плоскости
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+	//Что-то связанное с минимаппингом
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//Загрузка текстур
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	unsigned char *emg2 = (unsigned char*) img->pixels;
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->w, img->h, 0, GL_RGB, GL_UNSIGNED_BYTE, emg2);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	/*
 	GLuint indices[] = {
 		0, 1, 3,
@@ -155,10 +184,12 @@ int main()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     */
 	// Устанавливаем указатели на вершине
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof( GLfloat ), ( GLvoid * ) 0 );
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof( GLfloat ), ( GLvoid * ) 0 );
     glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof( GLfloat ), ( GLvoid * ) (3 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof( GLfloat ), ( GLvoid * ) (3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray( 1 );
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof( GLfloat ), ( GLvoid * ) (6 * sizeof(GLfloat)));
+	glEnableVertexAttribArray( 2 );
     // отвязываем VBO
     glBindBuffer( GL_ARRAY_BUFFER, 0 ); 
 	// Отвязываем VAO
@@ -182,6 +213,7 @@ int main()
 	   	glUniform1f(vertexColorLocation, timeValue);	
         glUseProgram( shaderProgram );
 		vertices[0] = sin(timeValue);
+		glBindTexture(GL_TEXTURE_2D, texture);
         glBindVertexArray( VAO );
         glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray( 0 );
@@ -198,5 +230,3 @@ int main()
     
     return EXIT_SUCCESS;
 }
-
-

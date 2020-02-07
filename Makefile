@@ -6,15 +6,17 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by thorker           #+#    #+#              #
-#    Updated: 2020/01/24 02:53:26 by thorker          ###   ########.fr        #
+#    Updated: 2020/02/05 16:45:21 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = scop
 HEADERS = includes/scop.h
-INC =  -I ~/.brew/Cellar/glfw/3.3/include/ -I $(LIB_DIR) -I ./includes -I ~/.brew/Cellar/glew/2.1.0/include/
-SRC = kekw.c
-LIB = -L $(LIB_DIR)/ -lft -L ~/.brew/Cellar/glfw/3.3/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib/ -lGLEW
+INC =  -I ~/.brew/Cellar/glfw/3.3/include/ -I $(LIB_DIR) -I ./includes -I ~/.brew/Cellar/glew/2.1.0/include/ \
+	   -I SDL2_image.framework/Versions/A/Headers -I ~/.brew/Cellar/sdl2/2.0.10/include
+SRC = main.c
+LIB = -L $(LIB_DIR)/ -lft -L ~/.brew/Cellar/glfw/3.3/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib/ -lGLEW \
+	  -L ~/.brew/Cellar/sdl2_image/2.0.5/lib/ -lSDL2_image
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 FRWR = -framework OpenGL
 
@@ -22,7 +24,7 @@ SRC_DIR = src
 OBJ_DIR = object
 LIB_DIR	= libft
 FRWR = -framework OpenGL
-FLAG = -Wall -Wextra -Werror -g
+FLAG = -g
 
 .PHONY : all clean fclean lib_ft re test
 
