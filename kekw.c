@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:37:54 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/05 17:18:23 by thorker          ###   ########.fr       */
+/*   Updated: 2020/02/10 03:50:21 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int main()
 		// выдать ошибку
     }
     
+	}
     // Создаем программу и соединяем шейдеры
     GLuint shaderProgram = glCreateProgram( );
     glAttachShader( shaderProgram, vertexShader );
