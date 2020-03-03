@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:32:32 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/11 21:03:16 by thorker          ###   ########.fr       */
+/*   Updated: 2020/03/03 04:37:58 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	clean_and_redraw(GLuint program, GLuint vao, GLFWwindow *window)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(program);
 	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 140, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	glfwSwapBuffers(window);
 }

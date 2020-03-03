@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 14:42:23 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/11 17:45:54 by thorker          ###   ########.fr       */
+/*   Updated: 2020/03/03 04:30:18 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_vve	create_vao_vbo(void)
 {
+	/*
 	const GLfloat	vertices[] = {
 		0.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f,
@@ -38,16 +39,23 @@ t_vve	create_vao_vbo(void)
 		5, 1, 0,
 		5, 0, 4
 	};
+	*/
+	t_obj			*object;
 	t_vve			vve;
+
+	object = create_object("42.obj");
+	ft_putnbrln(object->ind_size);
 
 	glGenVertexArrays(1, &(vve.vao));
 	glGenBuffers(1, &(vve.vbo));
 	glGenBuffers(1, &(vve.ebo));
 	glBindVertexArray(vve.vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vve.vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, object->ver_size * sizeof(GLfloat),
+			object->vertices, GL_STREAM_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vve.ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STREAM_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, object->ind_size * sizeof(GLuint),
+			object->indices, GL_STREAM_DRAW);
 	glVertexAttribPointer(0, 3,
 			GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);

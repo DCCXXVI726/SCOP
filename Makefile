@@ -6,15 +6,15 @@
 #    By: deladia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by thorker           #+#    #+#              #
-#    Updated: 2020/02/11 21:34:41 by thorker          ###   ########.fr        #
+#    Updated: 2020/03/03 04:25:32 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = scop
-HEADERS = includes/scop.h
+HEADERS = includes/scop.h includes/scop_error.h
 INC =  -I ~/.brew/Cellar/glfw/3.3/include/ -I $(LIB_DIR)/includes -I ./includes -I ~/.brew/Cellar/glew/2.1.0/include/ \
 	   -I SDL2_image.framework/Versions/A/Headers -I ~/.brew/Cellar/sdl2/2.0.10/include
-SRC = update_matrix.c hooks.c create_program.c create_vao_vbo.c main.c create_struct.c ft_loop.c ft_clear.c init_window.c ft_error.c
+SRC = add_smth.c create_object.c update_matrix.c hooks.c create_program.c create_vao_vbo.c main.c create_struct.c ft_loop.c ft_clear.c init_window.c ft_error.c
 LIB = -L $(LIB_DIR)/ -lft -L ~/.brew/Cellar/glfw/3.3/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib/ -lGLEW \
 	  -L ~/.brew/Cellar/sdl2_image/2.0.5/lib/ -lSDL2_image
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

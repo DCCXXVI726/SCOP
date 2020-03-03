@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/11 20:07:20 by thorker          ###   ########.fr       */
+/*   Updated: 2020/03/03 04:30:00 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <GLFW/glfw3.h>
 # include "libft.h"
 # include <math.h>
+# include "scop_error.h"
 # define WIN_H		600
 # define WIN_W		800
 # define WIN_NAME	"Scop"
@@ -41,6 +42,14 @@
 # define GLEW_INIT_E "problem with glew init"
 # define FRAG_E "problems with fragment shader"
 # define VERT_E "problem with verxet shader"
+
+typedef struct	s_obj
+{
+	GLfloat		*vertices;
+	size_t		ver_size;
+	GLuint		*indices;
+	size_t		ind_size;
+}				t_obj;
 
 typedef struct	s_matrix
 {
@@ -84,4 +93,7 @@ void			ft_clear(t_scop *scop);
 void			ft_error(char *msg);
 void			hooks(GLFWwindow *window, t_camera *camera);
 void			update_matrix(t_matrix  matrix, t_camera *camera);
+t_obj			*create_object(char *file_name);
+int				add_vertices(char *line, t_obj *object);
+int				add_indices(char *line, t_obj *object);
 #endif
