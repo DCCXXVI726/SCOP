@@ -6,11 +6,15 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:12:46 by thorker           #+#    #+#             */
-/*   Updated: 2020/02/11 21:00:31 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/27 20:07:10 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+/*
+** Создание матрицы для поворота и движение камеры
+*/
 
 GLfloat	*create_camera_matrix(void)
 {
@@ -24,6 +28,10 @@ GLfloat	*create_camera_matrix(void)
 		matrix[i++] = 0.0f;
 	return (matrix);
 }
+
+/*
+** Создание матрицы для проекии
+*/
 
 GLfloat	*create_projection(void)
 {
@@ -44,6 +52,10 @@ GLfloat	*create_projection(void)
 	matrix[14] = (-1) * (FAR * NEAR) / (FAR - NEAR);
 	return (matrix);
 }
+
+/*
+** Создание структуры для хранения всех данных
+*/
 
 t_scop	*create_struct(void)
 {

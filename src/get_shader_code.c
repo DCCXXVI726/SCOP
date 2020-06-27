@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clear.c                                         :+:      :+:    :+:   */
+/*   get_shader_code.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 17:46:56 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/27 20:01:34 by thorker          ###   ########.fr       */
+/*   Created: 2020/06/27 19:12:19 by thorker           #+#    #+#             */
+/*   Updated: 2020/06/27 19:54:19 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 /*
-** Чистка основной структуры
+**	Читает код из файла
 */
 
-void	ft_clear(t_scop *scop)
+char	*get_shader_code(char *name)
 {
-	if (scop != 0)
+	int		file;
+	char	*line;
+	int		max_buff;
+
+	max_buff = 65534;
+	if ((file = open(name, O_RDONLY)) < 0)
+		return NULL;
+	if ((line = (char*)malloc(max_buff)) == 0)
 	{
-		glDeleteVertexArrays(1, &(scop->vve.vao));
-		glDeleteBuffers(1, &(scop->vve.vbo));
-		glDeleteBuffers(1, &(scop->vve.ebo));
+		close(file);
+		return NULL;
 	}
-	glfwTerminate();
+	if (read(file, line, max_buff) == -1)
+		ft_strdel(&line);
+	close(file);
+	return line;
 }

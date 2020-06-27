@@ -6,11 +6,15 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 12:55:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/03/02 23:18:46 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/27 20:08:40 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+/*
+**	Проверяет правильно ли создался шейдер
+*/
 
 int		check_shader(GLuint shader)
 {
@@ -26,22 +30,14 @@ int		check_shader(GLuint shader)
 	return (0);
 }
 
+/*
+**	Создание vertex shader
+*/
+
 GLuint	create_vert(void)
 {
-	const GLchar	*vertex_shader_source = "#version 400 core\n"
-		"layout (location = 0) in vec3 position;\n"
-		"uniform vec3 camCoord;\n"
-		"uniform mat3 rot1;\n"
-		"uniform mat3 rot2;\n"
-		"uniform mat4 camera;\n"
-		"uniform mat4 projection;\n"
-		"out vec4 kek;\n"
-		"void main()\n"
-		"{\n"
-		"kek = vec4(position, 1.0f);\n"
-		"gl_Position = projection * camera * vec4(position - camCoord, 1.0f);\n"
-		"}\n\0";
 	GLuint			vertex_shader;
+	const GLchar	*vertex_shader_source = get_shader_code("vertex_shader");
 
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_source, 0);
@@ -51,24 +47,27 @@ GLuint	create_vert(void)
 	return (vertex_shader);
 }
 
+/*
+** Создание fragment shader
+*/
+
 GLuint	create_frag(void)
 {
-	const GLchar	*fragment_shader_source = "#version 400 core\n"
-		"out vec4 color;\n"
-		"in	vec4 kek;\n"
-		"void main()\n"
-		"{\n"
-		"color = kek;\n"
-		"}\n\0";
+	const GLchar	*fragment_shader_sourc = get_shader_code("fragment_shader");
 	GLuint			fragment_shader;
 
 	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment_shader, 1, &fragment_shader_source, 0);
+	glShaderSource(fragment_shader, 1, &fragment_shader_sourc, 0);
 	glCompileShader(fragment_shader);
 	if (check_shader(fragment_shader) != 0)
 		return (0);
 	return (fragment_shader);
 }
+
+/*
+** Создание программы шейдеров, привязка всех шейдеров
+** удалание шейдеров
+*/
 
 GLuint	create_program(void)
 {

@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/03/03 04:30:00 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/27 19:40:19 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 */
 
 # define GLEW_STATIC
+# include <fcntl.h>
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include "libft.h"
@@ -96,4 +97,6 @@ void			update_matrix(t_matrix  matrix, t_camera *camera);
 t_obj			*create_object(char *file_name);
 int				add_vertices(char *line, t_obj *object);
 int				add_indices(char *line, t_obj *object);
+void			*ft_realloc(void *old_mem, size_t old_size, void *add_mem, size_t add_size);
+char			*get_shader_code(char *name);
 #endif

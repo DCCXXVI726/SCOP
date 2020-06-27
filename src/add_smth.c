@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 02:33:08 by thorker           #+#    #+#             */
-/*   Updated: 2020/03/03 04:39:26 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/27 17:54:59 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		add_vertices(char *line, t_obj *object)
 		object->ver_size++;
 		i++;
 	}
-	cleanbuf(buffer);
+	ft_cleanbuf(buffer);
 	return (0);
 }
 
@@ -67,6 +67,6 @@ int		add_indices(char *line, t_obj *object)
 		object->ind_size++;
 		i++;
 	}
-	cleanbuf(buffer);
+	ft_cleanbuf(buffer);
 	return (0);
 }
