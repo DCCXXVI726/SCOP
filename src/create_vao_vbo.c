@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 14:42:23 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 19:00:19 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/28 20:15:31 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vve	create_vao_vbo(void)
 	t_obj			*object;
 	t_vve			vve;
 
-	object = create_object("42.obj");
+	object = create_object("resources/42.obj");
 	glGenVertexArrays(1, &(vve.vao));
 	glGenBuffers(1, &(vve.vbo));
 	glGenBuffers(1, &(vve.ebo));
