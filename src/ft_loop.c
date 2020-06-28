@@ -6,11 +6,16 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:32:32 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/27 20:08:25 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:25:10 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+/*
+** Обновляет позиции камеры, матрицы поворота камеры и проекции
+** (может их сразу перемножить?)
+*/
 
 void	update_uniform(t_camera *camera, t_matrix matrix, GLuint program)
 {
@@ -24,36 +29,12 @@ void	update_uniform(t_camera *camera, t_matrix matrix, GLuint program)
 	glUniformMatrix4fv(adress, 1, GL_FALSE, matrix.camera);
 }
 
+/*
+** Очистка экрана и отрисовка заново
+*/
+
 void	clean_and_redraw(GLuint program, GLuint vao, GLFWwindow *window)
 {
-	GLfloat	rotation1[9];
-	GLfloat rotation2[9];
-	size_t	i;
-	GLfloat timeValue;
-	GLint	adress;
-
-	i = 0;
-	while (i < 9)
-	{
-		rotation1[i] = 0;
-		rotation2[i] = 0;
-		i++;
-	}
-	timeValue = glfwGetTime();
-	rotation1[0] = cos(timeValue);
-	rotation1[1] = sin(timeValue);
-	rotation1[3] = -sin(timeValue);
-	rotation1[4] = cos(timeValue);
-	rotation1[8] = 1;
-	rotation2[0] = 1;
-	rotation2[4] = cos(timeValue * 0.5);
-	rotation2[5] = sin(timeValue * 0.5);
-	rotation2[7] = -sin(timeValue * 0.5);
-	rotation2[8] = cos(timeValue * 0.5);
-	adress = glGetUniformLocation(program, "rot1");
-	glUniformMatrix3fv(adress, 1, GL_FALSE, rotation1);
-	adress = glGetUniformLocation(program, "rot2");
-	glUniformMatrix3fv(adress, 1, GL_FALSE, rotation2);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(program);
@@ -63,9 +44,13 @@ void	clean_and_redraw(GLuint program, GLuint vao, GLFWwindow *window)
 	glfwSwapBuffers(window);
 }
 
+/*
+** Основной игровой цикл
+*/
+
 void	ft_loop(t_scop *scop)
 {
-	while (!glfwWindowShouldClose(scop->window) )
+	while (!glfwWindowShouldClose(scop->window))
 	{
 		glfwPollEvents();
 		hooks(scop->window, scop->camera);

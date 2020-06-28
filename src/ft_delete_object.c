@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_delete_object.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 17:57:15 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 19:53:45 by thorker          ###   ########.fr       */
+/*   Created: 2020/06/28 17:33:44 by thorker           #+#    #+#             */
+/*   Updated: 2020/06/28 18:18:48 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 /*
-** Выводит ошибку
+**  Очистка объекта
 */
 
-void	ft_error(char *msg)
+void	ft_delete_object(t_obj **object)
 {
-	ft_clear(0);
-	if (msg != 0)
-		ft_putendl(msg);
-	exit(0);
+	ft_memdel((void**)&((*object)->indices));
+	ft_memdel((void**)&((*object)->vertices));
+	ft_memdel((void**)object);
 }

@@ -6,7 +6,7 @@
 #    By: thorker <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 20:57:04 by thorker           #+#    #+#              #
-#    Updated: 2020/06/27 19:34:18 by thorker          ###   ########.fr        #
+#    Updated: 2020/06/28 18:16:47 by thorker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = scop
 HEADERS = includes/scop.h includes/scop_error.h
 INC =  -I ~/.brew/Cellar/glfw/3.3.2/include/ -I $(LIB_DIR)/includes -I ./includes -I ~/.brew/Cellar/glew/2.1.0_1/include/ \
 	   -I SDL2_image.framework/Versions/A/Headers -I ~/.brew/Cellar/sdl2/2.0.10/include
-SRC = get_shader_code.c ft_realloc.c add_smth.c create_object.c update_matrix.c hooks.c create_program.c create_vao_vbo.c main.c create_struct.c ft_loop.c ft_clear.c init_window.c ft_error.c
+SRC = ft_delete_object.c get_shader_code.c ft_realloc.c add_smth.c create_object.c update_matrix.c hooks.c create_program.c create_vao_vbo.c main.c create_struct.c ft_loop.c ft_clear.c init_window.c ft_error.c
 LIB = -L $(LIB_DIR)/ -lft -L ~/.brew/Cellar/glfw/3.3.2/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0_1/lib/ -lGLEW \
 	  -L ~/.brew/Cellar/sdl2_image/2.0.5/lib/ -lSDL2_image
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

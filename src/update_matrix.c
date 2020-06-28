@@ -6,13 +6,17 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 19:35:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/27 20:04:44 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:54:52 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	update_matrix(t_matrix	matrix, t_camera *camera)
+/*
+** Вычесление матрицы поворота камеры из углов
+*/
+
+void	update_matrix(t_matrix matrix, t_camera *camera)
 {
 	matrix.camera[0] = cos(camera->phi);
 	matrix.camera[1] = sin(camera->tetta) * sin(camera->phi);

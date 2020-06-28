@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 02:33:08 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/27 17:54:59 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:53:22 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** Добавить очистку после vertices == 0
-** 
+** Добавление вершин
 */
 
 int		add_vertices(char *line, t_obj *object)
@@ -22,9 +22,8 @@ int		add_vertices(char *line, t_obj *object)
 	char	**buffer;
 	GLfloat	tmp;
 	size_t	i;
-	GLfloat	*vertices;
 
-	if (line == 0)
+	if (line == NULL)
 		return (EMPTY_LINE_ERROR);
 	if ((buffer = ft_strsplit(line, ' ')) == 0)
 		return (SPLIT_ERROR);
@@ -32,11 +31,13 @@ int		add_vertices(char *line, t_obj *object)
 	while (*(buffer + i) != 0)
 	{
 		tmp = atof(*(buffer + i));
-		vertices = ft_realloc(object->vertices,
+		object->vertices = ft_realloc(object->vertices,
 				object->ver_size * sizeof(GLfloat), &tmp, sizeof(GLfloat));
-		if (vertices == 0)
+		if (object->vertices == NULL)
+		{
+			ft_cleanbuf(buffer);
 			return (-1);
-		object->vertices = vertices;
+		}
 		object->ver_size++;
 		i++;
 	}
@@ -44,26 +45,31 @@ int		add_vertices(char *line, t_obj *object)
 	return (0);
 }
 
+/*
+** Добавление индексов вершин
+*/
+
 int		add_indices(char *line, t_obj *object)
 {
 	char	**buffer;
 	GLuint	tmp;
 	size_t	i;
-	GLuint	*indices;
 
-	if (line == 0)
+	if (line == NULL)
 		return (EMPTY_LINE_ERROR);
 	if ((buffer = ft_strsplit(line, ' ')) == 0)
-		return(SPLIT_ERROR);
+		return (SPLIT_ERROR);
 	i = 1;
-	while (*(buffer + i) != 0)
+	while (*(buffer + i) != NULL)
 	{
 		tmp = ft_atoi(*(buffer + i)) - 1;
-		indices = ft_realloc(object->indices,
+		object->indices = ft_realloc(object->indices,
 				object->ind_size * sizeof(GLuint), &tmp, sizeof(GLuint));
-		if (indices == 0)
+		if (object->indices == NULL)
+		{
+			ft_cleanbuf(buffer);
 			return (-1);
-		object->indices = indices;
+		}
 		object->ind_size++;
 		i++;
 	}

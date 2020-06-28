@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 01:26:33 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/27 20:08:56 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:32:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 #include <fcntl.h>
 
 /*
-** Проверить object
+** Установка начальных значений
+*/
+
+void	init_object(t_obj *object)
+{
+	object->ind_size = 0;
+	object->indices = NULL;
+	object->ver_size = 0;
+	object->vertices = NULL;
+}
+
+/*
+** Создает объект(точки и треугольники из этих точек)
 */
 
 t_obj	*create_object(char *file_name)
@@ -24,26 +36,23 @@ t_obj	*create_object(char *file_name)
 	char	*line;
 	int		gnl;
 
-	if ((fd = open(file_name, O_RDONLY)) == -1)
-		return 0;
-	if ((object = (t_obj*)malloc(sizeof(t_obj))) == 0)
+	if (file_name != 0 && (fd = open(file_name, O_RDONLY)) == -1)
+		return (NULL);
+	if ((object = (t_obj*)malloc(sizeof(t_obj))) != 0)
 	{
-		close(fd);
-		return 0;
-	}
-	object->ind_size = 0;
-	object->indices = 0;
-	object->ver_size = 0;
-	object->vertices = 0;
-	while ((gnl = get_next_line(fd, &line)) > 0)
-	{
-		if (*line == 'v')
-			if ((gnl = add_vertices(line, object)) != 0)
-				break ;
-		if (*line == 'f')
-			if ((gnl = add_indices(line, object)) != 0)
-				break ;
-		free(line);
+		init_object(object);
+		while ((gnl = get_next_line(fd, &line)) > 0)
+		{
+			if (*line == 'v')
+				if ((gnl = add_vertices(line, object)) != 0)
+					break ;
+			if (*line == 'f')
+				if ((gnl = add_indices(line, object)) != 0)
+					break ;
+			free(line);
+		}
+		if (gnl != 0)
+			ft_delete_object(&object);
 	}
 	close(fd);
 	return (object);

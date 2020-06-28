@@ -1,8 +1,6 @@
 #version 400 core
 layout (location = 0) in vec3 position;
 uniform vec3 camCoord;
-uniform mat3 rot1;
-uniform mat3 rot2;
 uniform mat4 camera;
 uniform mat4 projection;
 out vec4 kek;
