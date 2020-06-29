@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 20:04:36 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/29 17:25:33 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "libft.h"
 # include <math.h>
 # include "scop_error.h"
+# define VERSION	0.1
 # define STEP		0.01f
 # define WIN_H		600
 # define WIN_W		800
