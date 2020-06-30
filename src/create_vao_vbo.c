@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 14:42:23 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 20:15:31 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:13:29 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_vve	create_vao_vbo(void)
 	t_obj			*object;
 	t_vve			vve;
 
-	object = create_object("resources/42.obj");
+	if ((object = create_object("resources/teapot.obj")) == 0)
+		ft_error("can't create object");
+	vve.ind_size = object->ind_size;
 	glGenVertexArrays(1, &(vve.vao));
 	glGenBuffers(1, &(vve.vbo));
 	glGenBuffers(1, &(vve.ebo));
@@ -43,5 +45,6 @@ t_vve	create_vao_vbo(void)
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	ft_delete_object(&object);
 	return (vve);
 }

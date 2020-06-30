@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/29 18:18:09 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 19:54:14 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_vve
 	GLuint		vbo;
 	GLuint		vao;
 	GLuint		ebo;
+	size_t		ind_size;
 }				t_vve;
 
 typedef struct	s_scop

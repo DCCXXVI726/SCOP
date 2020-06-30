@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 12:55:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 20:14:54 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:12:18 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ GLuint	create_vert(void)
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &vertex_shader_src, 0);
 	glCompileShader(vertex_shader);
+	free((void*)vertex_shader_src);
 	if (check_shader(vertex_shader) != 0)
 		return (0);
 	return (vertex_shader);
@@ -59,6 +60,7 @@ GLuint	create_frag(void)
 	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment_shader, 1, &frag_shader_src, 0);
 	glCompileShader(fragment_shader);
+	free((void*)frag_shader_src);
 	if (check_shader(fragment_shader) != 0)
 		return (0);
 	return (fragment_shader);

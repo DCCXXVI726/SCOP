@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 02:33:08 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 19:53:22 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:19:10 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,40 @@ int		add_vertices(char *line, t_obj *object)
 }
 
 /*
+** Переводит строку индексов в буфер
+** Если индексов больше 3х, разбивает по тройкам
+*/
+
+char	**create_buffer(char *line)
+{
+	char	**buffer;
+	size_t	length;
+	char	**new_buffer;
+	size_t	i;
+
+	if ((buffer = ft_strsplit(line, ' ')) == 0)
+		return (NULL);
+	length = 0;
+	while (*(buffer + length) != NULL)
+		length++;
+	if ((new_buffer = (char**)malloc(sizeof(char*) *
+					((length - 3) * 3 + 1))) != NULL)
+	{
+		i = 0;
+		while (i < (length - 3))
+		{
+			*(new_buffer + i * 3) = ft_strdup(*(buffer + 1));
+			*(new_buffer + i * 3 + 1) = ft_strdup(*(buffer + i + 2));
+			*(new_buffer + i * 3 + 2) = ft_strdup(*(buffer + i + 3));
+			i++;
+		}
+		*(new_buffer + i * 3) = NULL;
+	}
+	ft_cleanbuf(buffer);
+	return (new_buffer);
+}
+
+/*
 ** Добавление индексов вершин
 */
 
@@ -57,9 +91,9 @@ int		add_indices(char *line, t_obj *object)
 
 	if (line == NULL)
 		return (EMPTY_LINE_ERROR);
-	if ((buffer = ft_strsplit(line, ' ')) == 0)
+	if ((buffer = create_buffer(line)) == 0)
 		return (SPLIT_ERROR);
-	i = 1;
+	i = 0;
 	while (*(buffer + i) != NULL)
 	{
 		tmp = ft_atoi(*(buffer + i)) - 1;

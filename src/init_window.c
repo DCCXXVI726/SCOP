@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 14:37:16 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 20:14:58 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:31:09 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		init_window(t_scop *scop)
 	if ((scop->window = glfwCreateWindow(WIN_W, WIN_H, WIN_NAME, 0, 0)) == 0)
 		ft_error(GLFW_WIN_E);
 	glfwMakeContextCurrent(scop->window);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (glewInit() != GLEW_OK)
 		ft_error(GLEW_INIT_E);
 	glEnable(GL_DEPTH_TEST);

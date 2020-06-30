@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:32:32 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 19:25:10 by thorker          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:08:47 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ void	update_uniform(t_camera *camera, t_matrix matrix, GLuint program)
 ** Очистка экрана и отрисовка заново
 */
 
-void	clean_and_redraw(GLuint program, GLuint vao, GLFWwindow *window)
+void	clean_and_redraw(GLuint program, GLuint vao,
+		GLFWwindow *window, size_t ind_size)
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(program);
 	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, 140, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, ind_size, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	glfwSwapBuffers(window);
 }
@@ -56,7 +57,8 @@ void	ft_loop(t_scop *scop)
 		hooks(scop->window, scop->camera);
 		update_matrix(scop->matrix, scop->camera);
 		update_uniform(scop->camera, scop->matrix, scop->shader_program);
-		clean_and_redraw(scop->shader_program, scop->vve.vao, scop->window);
+		clean_and_redraw(scop->shader_program, scop->vve.vao,
+				scop->window, scop->vve.ind_size);
 	}
 	ft_clear(scop);
 }
