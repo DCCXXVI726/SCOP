@@ -6,12 +6,13 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 01:26:33 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/30 20:14:15 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/05 18:34:36 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 /*
 ** Установка начальных значений
@@ -49,7 +50,7 @@ t_obj	*create_object(char *file_name)
 			if (*line == 'f')
 				if ((gnl = add_indices(line, object)) != 0)
 					break ;
-			free(line);
+			ft_strdel(&line);
 		}
 		if (gnl != 0)
 			ft_delete_object(&object);
