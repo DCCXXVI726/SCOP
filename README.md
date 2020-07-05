@@ -3,7 +3,7 @@ Program that will show a 3D object conceived with a modelisation program like Bl
 ## Getting started
 This guide works only in MacOS. The most important things added in [Makefile](https://en.wikipedia.org/wiki/Makefile).
 ### Prerequisites
-First of all, you need install [glew](https://en.wikipedia.org/wiki/OpenGL_Extension_Wrangler_Library) and [glfw](https://en.wikipedia.org/wiki/GLFW).
+First of all, you need install [glew](https://en.wikipedia.org/wiki/OpenGL_Extension_Wrangler_Library) and [glfw](https://en.wikipedia.org/wiki/GLFW). (not ready)
 ```
 make preinstall
 ```
