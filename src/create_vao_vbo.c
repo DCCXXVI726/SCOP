@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 14:42:23 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/05 18:22:12 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/06 15:59:09 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 ** Индексы вершин для отрисовки по одинаковым точкам
 */
 
-t_vve	create_vao_vbo(void)
+t_vve	create_vao_vbo(char *file_name)
 {
 	t_obj			*object;
 	t_vve			vve;
 
-	if ((object = create_object("resources/teapot.obj")) == 0)
+	if ((object = create_object(file_name)) == 0)
 		ft_error("can't create object");
 	vve.ind_size = object->ind_size;
 	glGenVertexArrays(1, &(vve.vao));
