@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:12:19 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/30 20:14:05 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/06 17:23:31 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_shader_code(char *name)
 	int		max_buff;
 
 	max_buff = 65534;
-	if ((file = open(name, O_RDONLY)) < 0)
+	if (name == NULL || (file = open(name, O_RDONLY)) < 0)
 		return (NULL);
 	if ((line = (char*)malloc(max_buff)) == 0)
 	{

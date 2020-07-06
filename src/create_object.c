@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 01:26:33 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/05 18:34:36 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/06 17:23:56 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_obj	*create_object(char *file_name)
 	char	*line;
 	int		gnl;
 
-	if (file_name != 0 && (fd = open(file_name, O_RDONLY)) == -1)
+	if (file_name == NULL || (fd = open(file_name, O_RDONLY)) == -1)
 		return (NULL);
 	if ((object = (t_obj*)malloc(sizeof(t_obj))) != 0)
 	{
