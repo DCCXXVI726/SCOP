@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/05 18:20:35 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/06 16:02:31 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct	s_scop
 }				t_scop;
 
 void			ft_delete_object(t_obj **object);
-t_vve			create_vao_vbo(void);
+t_vve			create_vao_vbo(char *file_name);
 GLuint			create_program();
 t_scop			*create_struct(void);
 int				init_window(t_scop *scop);
