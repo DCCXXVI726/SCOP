@@ -1,7 +1,10 @@
 #version 400 core
 out vec4 color;
 in	vec4 kek;
+in	vec2 texCoord;
+uniform sampler2D ourTexture;
+
 void main()
 {
-	color = kek;
+	color = texture(ourTexture, texCoord);
 }

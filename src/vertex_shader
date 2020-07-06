@@ -4,8 +4,10 @@ uniform vec3 camCoord;
 uniform mat4 camera;
 uniform mat4 projection;
 out vec4 kek;
+out vec2 texCoord;
 void main()
 {
+	texCoord = vec2(position.z, 1 - position.y);
 	kek = vec4(position, 1.0f);
 	gl_Position = projection * camera * vec4(position - camCoord, 1.0f);
 }

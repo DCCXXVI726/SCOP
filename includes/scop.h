@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/06 16:02:31 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/06 19:37:55 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define GLEW_STATIC
 # include <fcntl.h>
+# include <SDL_image.h>
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include "libft.h"
@@ -36,6 +37,7 @@
 # define FAR		1000.0f
 # define MOUSE_SENX	0.0005f
 # define MOUSE_SENY	0.0005f
+
 /*
 **	ERRORS
 */
@@ -86,8 +88,10 @@ typedef struct	s_scop
 	t_vve		vve;
 	t_camera	*camera;
 	t_matrix	matrix;
+	GLuint		texture;
 }				t_scop;
 
+int				create_texture(char *image_name, GLuint *texture);
 void			ft_delete_object(t_obj **object);
 t_vve			create_vao_vbo(char *file_name);
 GLuint			create_program();
@@ -97,10 +101,11 @@ void			ft_loop(t_scop *scop);
 void			ft_clear(t_scop *scop);
 void			ft_error(char *msg);
 void			hooks(GLFWwindow *window, t_camera *camera);
-void			update_matrix(t_matrix  matrix, t_camera *camera);
+void			update_matrix(t_matrix matrix, t_camera *camera);
 t_obj			*create_object(char *file_name);
 int				add_vertices(char *line, t_obj *object);
 int				add_indices(char *line, t_obj *object);
-void			*ft_realloc(void *old_mem, size_t old_size, void *add_mem, size_t add_size);
+void			*ft_realloc(void *old_mem, size_t old_size,
+		void *add_mem, size_t add_size);
 char			*get_shader_code(char *name);
 #endif
