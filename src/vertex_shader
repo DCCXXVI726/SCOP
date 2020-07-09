@@ -8,6 +8,7 @@ out vec2 texCoord;
 void main()
 {
 	texCoord = vec2(position.z, 1 - position.y);
-	kek = vec4(position, 1.0f);
-	gl_Position = projection * camera * vec4(position - camCoord, 1.0f);
+	kek = camera * vec4(position, 1.0f);
+	kek = kek - vec4(camCoord, 0.0f);
+	gl_Position = projection * kek;
 }
