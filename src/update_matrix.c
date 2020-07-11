@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 19:35:18 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/09 17:12:40 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/11 17:51:53 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 ** Засунусть center в структуру
 */
 
-void	update_matrix(t_matrix matrix, t_camera *camera)
+void	update_matrix(t_matrix matrix, t_camera *camera, float *center)
 {
-	float center[3] = {0.0f, 0.0f, -1.0f};
-
+	camera->phi = glfwGetTime();
 	matrix.camera[0] = cos(camera->phi);
 	matrix.camera[1] = sin(camera->tetta) * sin(camera->phi);
 	matrix.camera[2] = sin(camera->phi) * cos(camera->tetta);

@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/06 19:37:55 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/11 17:22:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_vve
 	GLuint		vao;
 	GLuint		ebo;
 	size_t		ind_size;
+	float		*center;
 }				t_vve;
 
 typedef struct	s_scop
@@ -101,7 +102,7 @@ void			ft_loop(t_scop *scop);
 void			ft_clear(t_scop *scop);
 void			ft_error(char *msg);
 void			hooks(GLFWwindow *window, t_camera *camera);
-void			update_matrix(t_matrix matrix, t_camera *camera);
+void			update_matrix(t_matrix matrix, t_camera *camera, float *center);
 t_obj			*create_object(char *file_name);
 int				add_vertices(char *line, t_obj *object);
 int				add_indices(char *line, t_obj *object);

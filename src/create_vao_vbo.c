@@ -6,11 +6,37 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 14:42:23 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/06 16:25:24 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/11 18:22:18 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+/*
+** Находим центр масс объекта
+*/
+
+static	float	*create_center(t_obj *object)
+{
+	float	*center;
+	size_t	i;
+
+	if ((center = (float*)malloc(sizeof(float) * 3)) == NULL)
+		return (NULL);
+	center[0] = 0;
+	center[1] = 0;
+	center[2] = 0;
+	i = 0;
+	while (i < object->ver_size)
+	{
+		center[i % 3] += object->vertices[i];
+		i++;
+	}
+	center[0] = -center[0] / (object->ver_size / 3);
+	center[1] = -center[1] / (object->ver_size / 3);
+	center[2] = -center[2] / (object->ver_size / 3);
+	return (center);
+}
 
 /*
 ** Создаем основные структуры
@@ -22,13 +48,15 @@
 ** Индексы вершин для отрисовки по одинаковым точкам
 */
 
-t_vve	create_vao_vbo(char *file_name)
+t_vve			create_vao_vbo(char *file_name)
 {
 	t_obj			*object;
 	t_vve			vve;
 
 	if ((object = create_object(file_name)) == 0)
 		ft_error("can't create object");
+	if ((vve.center = create_center(object)) == NULL)
+		ft_error("can't create center");
 	vve.ind_size = object->ind_size;
 	glGenVertexArrays(1, &(vve.vao));
 	glGenBuffers(1, &(vve.vbo));

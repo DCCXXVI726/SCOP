@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:32:32 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/06 18:17:03 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/11 17:19:38 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_loop(t_scop *scop)
 	{
 		glfwPollEvents();
 		hooks(scop->window, scop->camera);
-		update_matrix(scop->matrix, scop->camera);
+		update_matrix(scop->matrix, scop->camera, scop->vve.center);
 		update_uniform(scop->camera, scop->matrix, scop->shader_program);
 		clean_and_redraw(scop);
 	}
