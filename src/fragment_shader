@@ -1,10 +1,24 @@
 #version 400 core
 out vec4 color;
+vec4 c1;
+vec4 c2;
 in	vec4 kek;
 in	vec2 texCoord;
+uniform	float	procent;
+uniform int		c_flag;
 uniform sampler2D ourTexture;
 
 void main()
 {
-	color = texture(ourTexture, texCoord);
+	if (c_flag == 1)
+	{
+		c2 = kek;
+        c1 = texture(ourTexture, texCoord);
+	}
+	else
+	{
+		c1 = kek;
+		c2 = texture(ourTexture, texCoord);
+	}
+	color = (c2 - c1) * procent + c1;
 }

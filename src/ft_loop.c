@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:32:32 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/11 17:19:38 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/12 19:13:24 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	update_uniform(t_camera *camera, t_matrix matrix, GLuint program)
 	glUniformMatrix4fv(adress, 1, GL_FALSE, matrix.projection);
 	adress = glGetUniformLocation(program, "camera");
 	glUniformMatrix4fv(adress, 1, GL_FALSE, matrix.camera);
+	adress = glGetUniformLocation(program, "procent");
+	glUniform1f(adress, camera->procent_color);
+	adress = glGetUniformLocation(program, "c_flag");
+	glUniform1i(adress, camera->color_flag);
 }
 
 /*

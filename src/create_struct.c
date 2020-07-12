@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:12:46 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/06 16:23:21 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/12 18:37:27 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_scop	*create_struct(void)
 	scop->camera->last_x = WIN_W / 2;
 	scop->camera->last_y = WIN_H / 2;
 	scop->camera->phi = 0;
+	scop->camera->color_flag = 1;
+	scop->camera->procent_color = 0;
 	scop->camera->tetta = 0;
 	scop->matrix.projection = create_projection();
 	scop->matrix.camera = create_camera_matrix();

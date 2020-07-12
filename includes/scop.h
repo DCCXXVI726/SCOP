@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 21:45:12 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/11 17:22:24 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/12 18:30:48 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct	s_camera
 	GLfloat		tetta;
 	double		last_x;
 	double		last_y;
+	int			color_flag;
+	float		procent_color;
 }				t_camera;
 
 typedef struct	s_vve

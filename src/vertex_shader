@@ -11,4 +11,5 @@ void main()
 	kek = camera * vec4(position, 1.0f);
 	kek = kek - vec4(camCoord, 0.0f);
 	gl_Position = projection * kek;
+	kek = vec4(position, 1.0f);
 }
