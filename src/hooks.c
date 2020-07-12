@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:06:40 by thorker           #+#    #+#             */
-/*   Updated: 2020/06/28 19:07:34 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/12 17:19:18 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,29 @@
 
 void	mouse_hooks(GLFWwindow *window, t_camera *camera)
 {
-	double	x;
-	double	y;
+	double			x;
+	double			y;
+	static int		flag = 1;
+	static float	last_time = 0;
 
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+		if ((flag = flag * -1) == 1)
+			lastTime = glfwGetTime();
 	glfwGetCursorPos(window, &x, &y);
-	camera->tetta += (y - camera->last_y) * MOUSE_SENY;
-	if (camera->tetta > M_PI / 2)
-		camera->tetta = M_PI / 2;
-	else if (camera->tetta < -M_PI / 2)
-		camera->tetta = -M_PI / 2;
-	camera->phi += (x - camera->last_x) * MOUSE_SENX;
+	if (flag != 1)
+	{
+		camera->tetta += (y - camera->last_y) * MOUSE_SENY;
+		if (camera->tetta > M_PI / 2)
+			camera->tetta = M_PI / 2;
+		else if (camera->tetta < -M_PI / 2)
+			camera->tetta = -M_PI / 2;
+		camera->phi += (x - camera->last_x) * MOUSE_SENX;
+	}
+	else
+	{
+		camera->phi = camera->phi + glfwGetTime() - last_time;
+		last_time = glfwGetTime();
+	}
 	camera->last_x = x;
 	camera->last_y = y;
 }
