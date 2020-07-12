@@ -6,7 +6,7 @@
 /*   By: thorker <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 18:06:40 by thorker           #+#    #+#             */
-/*   Updated: 2020/07/12 17:19:18 by thorker          ###   ########.fr       */
+/*   Updated: 2020/07/12 19:13:38 by thorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 /*
 ** обработка изменений мыши
 */
+
+void	change_color(GLFWwindow *window, t_camera *camera)
+{
+	static float	last_time = 0;
+	static float	last_procent = 0;
+
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		last_time = glfwGetTime();
+		camera->color_flag *= -1;
+		last_procent = 1.0f - camera->procent_color;
+		camera->procent_color = last_procent;
+	}
+	if (camera->procent_color < 1.0f)
+	{
+		camera->procent_color = last_procent + (glfwGetTime() - last_time) / 3;
+		if (camera->procent_color > 1.0f)
+			camera->procent_color = 1.0f;
+	}
+}
 
 void	mouse_hooks(GLFWwindow *window, t_camera *camera)
 {
@@ -25,7 +45,7 @@ void	mouse_hooks(GLFWwindow *window, t_camera *camera)
 
 	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
 		if ((flag = flag * -1) == 1)
-			lastTime = glfwGetTime();
+			last_time = glfwGetTime();
 	glfwGetCursorPos(window, &x, &y);
 	if (flag != 1)
 	{
@@ -51,6 +71,7 @@ void	mouse_hooks(GLFWwindow *window, t_camera *camera)
 
 void	hooks(GLFWwindow *window, t_camera *camera)
 {
+	change_color(window, camera);
 	mouse_hooks(window, camera);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera->x += STEP;
