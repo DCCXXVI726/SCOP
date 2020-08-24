@@ -30,8 +30,10 @@ int		init_window(t_scop *scop)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	ft_putendl("kekw");
 	if ((scop->window = glfwCreateWindow(WIN_W, WIN_H, WIN_NAME, 0, 0)) == 0)
 		ft_error(GLFW_WIN_E);
+	ft_putendl("kekwait");
 	glfwMakeContextCurrent(scop->window);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	if (glewInit() != GLEW_OK)
